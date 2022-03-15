@@ -10,6 +10,11 @@
 |--|--|
 *EL ASSOURI* | *Mohammed*|
 
+##How to start
+  ```shell
+    mvnw spring-boot:run
+  ```
+
 ## Routes
 
 - Get User
