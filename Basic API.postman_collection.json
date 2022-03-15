@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "64873545-8284-4936-a39a-7ac5f07b479b",
+		"name": "Basic API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mohammed EL ASSOURI\",\r\n    \"birthDate\": \"05/11/1998\",\r\n    \"country\": \"France\",\r\n    \"phoneNumber\": \"0698554441\",\r\n    \"gender\": \"MALE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/99",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User error",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"\",\r\n    \"birthDate\": \"\",\r\n    \"country\": \"\",\r\n    \"phoneNumber\": \"\",\r\n    \"gender\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User error 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"sdfdsf\",\r\n    \"birthDate\": \"sdfdsf\",\r\n    \"country\": \"dsfdsf\",\r\n    \"phoneNumber\": \"dsfsdfdsf\",\r\n    \"gender\": \"dsfdsfdsf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
