@@ -3,7 +3,7 @@ package com.nujabness.basicapi.service.user.impl;
 import com.nujabness.basicapi.service.exception.BusinessException;
 import com.nujabness.basicapi.bean.user.UserDTO;
 import com.nujabness.basicapi.data.dao.IUserRepository;
-import com.nujabness.basicapi.service.mapper.user.impl.UserMapper;
+import com.nujabness.basicapi.service.mapper.user.UserMapper;
 import com.nujabness.basicapi.service.user.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
