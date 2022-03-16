@@ -4,11 +4,11 @@ import org.junit.Test;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 
-public class UserBeanTest {
+public class UserDTOTest {
 
     @Test
-    public void UserBeanTestPOJO() {
-        final Class<?> classUnderTest = UserBean.class;
+    public void UserDTOTestPOJO() {
+        final Class<?> classUnderTest = UserDTO.class;
         assertPojoMethodsFor(classUnderTest).areWellImplemented();
     }
 }

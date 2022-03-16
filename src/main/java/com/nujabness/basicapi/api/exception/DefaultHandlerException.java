@@ -2,6 +2,7 @@ package com.nujabness.basicapi.api.exception;
 
 
 import com.nujabness.basicapi.api.response.ErrorResponse;
+import com.nujabness.basicapi.service.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -22,6 +23,14 @@ public class DefaultHandlerException {
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse("Server Error", details);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(BusinessException ex) {
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+        ErrorResponse error = new ErrorResponse("Operation Failed", details);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

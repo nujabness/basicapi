@@ -1,11 +1,11 @@
 package com.nujabness.basicapi.service.user;
 
-import com.nujabness.basicapi.bean.user.UserBean;
+import com.nujabness.basicapi.bean.user.UserDTO;
 
 public interface IUserService {
 
-    UserBean getUserById(Integer id);
+    UserDTO getUserById(Integer id);
 
-    Integer createUser(UserBean id);
+    UserDTO createUser(UserDTO id);
 
 }

@@ -1,6 +1,7 @@
 package com.nujabness.basicapi.bean.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nujabness.basicapi.bean.common.Gender;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +10,9 @@ import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Data
-public class UserBean {
+public class UserDTO {
+
+    private Integer id;
 
     @NotBlank(message = "Name must not be null or empty")
     private String name;
@@ -26,8 +29,5 @@ public class UserBean {
             message = "PhoneNumber is not Valid")
     private String phoneNumber;
 
-    @NotBlank(message = "Gender must not be null")
-    @Pattern(regexp = "MALE|FEMALE",
-            message = "Gender is not Valid")
-    private String gender;
+    private Gender gender;
 }

@@ -1,7 +1,7 @@
 package com.nujabness.basicapi.service.user;
 
 import com.nujabness.basicapi.bean.common.Gender;
-import com.nujabness.basicapi.bean.user.UserBean;
+import com.nujabness.basicapi.bean.user.UserDTO;
 import com.nujabness.basicapi.data.dao.IUserRepository;
 import com.nujabness.basicapi.data.entity.User;
 import com.nujabness.basicapi.service.exception.BusinessException;
@@ -49,40 +49,42 @@ public class UserServiceTest {
     public void createUser() throws ParseException {
         when(userRepository.save(any(User.class))).thenReturn(user);
 
-        UserBean userBean = new UserBean();
+        UserDTO userDTO = new UserDTO();
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
-        userBean.setName("Mohammed");
-        userBean.setPhoneNumber("0695844566");
-        userBean.setCountry("France");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
-        Integer id = userService.createUser(userBean);
+        userDTO.setName("Mohammed");
+        userDTO.setPhoneNumber("0695844566");
+        userDTO.setCountry("France");
+        user.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
+        UserDTO res = userService.createUser(userDTO);
 
-        assertThat(id).isEqualTo(1);
+        assertThat(res.getId()).isEqualTo(1);
+        assertThat(res.getName()).isEqualTo("Mohammed");
+        assertThat(res.getCountry()).isEqualTo("France");
     }
 
     @Test
     public void createUserNotFrench() throws ParseException {
-        UserBean userBean = new UserBean();
+        UserDTO userDTO = new UserDTO();
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
-        userBean.setName("Mohammed");
-        userBean.setPhoneNumber("0695844566");
-        userBean.setCountry("Spain");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
-        assertThrows(BusinessException.class, () -> userService.createUser(userBean));
+        userDTO.setName("Mohammed");
+        userDTO.setPhoneNumber("0695844566");
+        userDTO.setCountry("Spain");
+        user.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
+        assertThrows(BusinessException.class, () -> userService.createUser(userDTO));
     }
 
     @Test
     public void createUserMineur() throws ParseException {
-        UserBean userBean = new UserBean();
+        UserDTO userDTO = new UserDTO();
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/2010");
-        userBean.setName("Mohammed");
-        userBean.setPhoneNumber("0695844566");
-        userBean.setCountry("France");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
-        assertThrows(BusinessException.class, () -> userService.createUser(userBean));
+        userDTO.setName("Mohammed");
+        userDTO.setPhoneNumber("0695844566");
+        userDTO.setCountry("France");
+        user.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
+        assertThrows(BusinessException.class, () -> userService.createUser(userDTO));
     }
 
 }

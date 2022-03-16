@@ -1,13 +1,9 @@
 package com.nujabness.basicapi.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nujabness.basicapi.bean.common.Gender;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,7 +21,6 @@ public class User {
     @NotBlank(message = "Name must not be null or empty")
     private String name;
 
-    @JsonFormat(pattern = "dd/mm/yyyy")
     @NotNull(message = "BirthDate must not be null")
     private Date birthDate;
 
@@ -37,7 +32,7 @@ public class User {
              message = "PhoneNumber is not Valid")
     private String phoneNumber;
 
-    @NotNull(message = "Gender must not be null")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
 }

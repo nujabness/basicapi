@@ -1,7 +1,6 @@
 package com.nujabness.basicapi.service.mapper.user;
 
-import com.nujabness.basicapi.bean.common.Gender;
-import com.nujabness.basicapi.bean.user.UserBean;
+import com.nujabness.basicapi.bean.user.UserDTO;
 import com.nujabness.basicapi.data.entity.User;
 
 public class UserMapper {
@@ -10,23 +9,24 @@ public class UserMapper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static UserBean userToUserBean(User user) {
-        UserBean userBean = new UserBean();
-        userBean.setName(user.getName());
-        userBean.setBirthDate(user.getBirthDate());
-        userBean.setCountry(user.getCountry());
-        userBean.setPhoneNumber(user.getPhoneNumber());
-        userBean.setGender(user.getGender().toString());
-		return userBean;
+    public static UserDTO userToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setBirthDate(user.getBirthDate());
+        userDTO.setCountry(user.getCountry());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setGender(user.getGender());
+		return userDTO;
     }
 
-    public static User userBeanToUser(UserBean userBean) {
+    public static User userDTOToUser(UserDTO userDTO) {
         User user = new User();
-        user.setName(userBean.getName());
-        user.setBirthDate(userBean.getBirthDate());
-        user.setCountry(userBean.getCountry());
-        user.setPhoneNumber(userBean.getPhoneNumber());
-        user.setGender(Gender.valueOf(userBean.getGender()));
+        user.setName(userDTO.getName());
+        user.setBirthDate(userDTO.getBirthDate());
+        user.setCountry(userDTO.getCountry());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setGender(userDTO.getGender());
         return user;
     }
 

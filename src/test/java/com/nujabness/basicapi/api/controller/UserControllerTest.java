@@ -1,10 +1,12 @@
 package com.nujabness.basicapi.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nujabness.basicapi.bean.user.UserBean;
+import com.nujabness.basicapi.bean.common.Gender;
+import com.nujabness.basicapi.bean.user.UserDTO;
 import com.nujabness.basicapi.service.exception.BusinessException;
 import com.nujabness.basicapi.service.user.impl.UserService;
 import org.hamcrest.Matchers;
+import org.hibernate.type.LocalDateType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,85 +46,85 @@ public class UserControllerTest {
     public void getUserById() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
-        UserBean userBean = new UserBean();
-        userBean.setName("Momo");
-        userBean.setPhoneNumber("0655887744");
-        userBean.setCountry("France");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName("Momo");
+        userDTO.setPhoneNumber("0655887744");
+        userDTO.setCountry("France");
+        userDTO.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
 
-        when(userService.getUserById(id)).thenReturn(userBean);
+        when(userService.getUserById(id)).thenReturn(userDTO);
 
         mvc.perform(get(APP + id)
                 .contentType(APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("name").value(userBean.getName()))
-            .andExpect(jsonPath("country").value(userBean.getCountry()))
-            .andExpect(jsonPath("phoneNumber").value(userBean.getPhoneNumber()));
+            .andExpect(jsonPath("name").value(userDTO.getName()))
+            .andExpect(jsonPath("country").value(userDTO.getCountry()))
+            .andExpect(jsonPath("phoneNumber").value(userDTO.getPhoneNumber()));
     }
 
     @Test
-    public void getUserById_NotFound() throws Exception {
+    public void getUserByIdNotFound() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
-        UserBean userBean = new UserBean();
-        userBean.setName("Momo");
-        userBean.setPhoneNumber("0655887744");
-        userBean.setCountry("France");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName("Momo");
+        userDTO.setPhoneNumber("0655887744");
+        userDTO.setCountry("France");
+        userDTO.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
 
         when(userService.getUserById(id)).thenThrow(new BusinessException("Record not Found"));
 
-        MvcResult result = mvc.perform(get(APP + id)
-                        .contentType(APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        assertEquals("Record not Found", result.getResponse().getContentAsString());
+        mvc.perform(get(APP + id)
+                    .contentType(APPLICATION_JSON))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("details").value(Matchers.containsInAnyOrder("Record not Found")));
     }
 
     @Test
     public void createUser() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
-        UserBean userBean = new UserBean();
-        userBean.setName("Momo");
-        userBean.setPhoneNumber("0655887744");
-        userBean.setCountry("France");
-        userBean.setGender("MALE");
-        userBean.setBirthDate(birthDate);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1);
+        userDTO.setName("Momo");
+        userDTO.setPhoneNumber("0655887744");
+        userDTO.setCountry("France");
+        userDTO.setGender(Gender.MALE);
+        userDTO.setBirthDate(birthDate);
 
-        when(userService.createUser(any(UserBean.class))).thenReturn(id);
+        when(userService.createUser(any(UserDTO.class))).thenReturn(userDTO);
 
         mvc.perform(post(APP)
-                .content(objectMapper.writeValueAsString(userBean))
+                .content(objectMapper.writeValueAsString(userDTO))
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isCreated())
-            .andExpect(header().string("Location", "/users/1"));
+            .andExpect(jsonPath("id").value("1"))
+            .andExpect(jsonPath("name").value("Momo"))
+            .andExpect(jsonPath("phoneNumber").value("0655887744"));
     }
 
     @Test
-    public void createUser_InvalidUser() throws Exception {
+    public void createUserInvalidUser() throws Exception {
         Integer id = 1;
-        UserBean userBean = new UserBean();
-        userBean.setName(null);
-        userBean.setPhoneNumber(null);
-        userBean.setCountry(null);
-        userBean.setGender(null);
-        userBean.setBirthDate(null);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(null);
+        userDTO.setPhoneNumber(null);
+        userDTO.setCountry(null);
+        userDTO.setGender(null);
+        userDTO.setBirthDate(null);
 
-        when(userService.createUser(any(UserBean.class))).thenReturn(id);
+        when(userService.createUser(any(UserDTO.class))).thenReturn(userDTO);
 
         mvc.perform(post(APP)
-                .content(objectMapper.writeValueAsString(userBean))
+                .content(objectMapper.writeValueAsString(userDTO))
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("details").value(Matchers.containsInAnyOrder(
-                "BirthDate must not be null",
-                "Country must not be null or empty",
-                "Gender must not be null",
-                "PhoneNumber must not be null",
-                "Name must not be null or empty")));
+                    "PhoneNumber must not be null",
+                    "Name must not be null or empty",
+                    "BirthDate must not be null",
+                    "Country must not be null or empty")));
     }
 }
