@@ -20,7 +20,7 @@ public class User {
     @Id
     @Column(nullable = false)
     @GeneratedValue
-        private Integer id;
+    private Integer id;
 
     @NotBlank(message = "Name must not be null or empty")
     private String name;
@@ -34,8 +34,7 @@ public class User {
 
     @NotBlank(message = "PhoneNumber must not be null")
     @Pattern(regexp = "^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
-            message = "PhoneNumber is not Valid"
-    )
+             message = "PhoneNumber is not Valid")
     private String phoneNumber;
 
     @NotNull(message = "Gender must not be null")
