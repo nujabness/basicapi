@@ -46,7 +46,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUser() throws ParseException {
+    public void createUser_True_UserValid() throws ParseException {
         when(userRepository.save(any(User.class))).thenReturn(user);
 
         UserDTO userDTO = new UserDTO();
@@ -58,13 +58,14 @@ public class UserServiceTest {
         userDTO.setBirthDate(birthDate);
         UserDTO res = userService.createUser(userDTO);
 
-        assertThat(res.getId()).isEqualTo(1);
-        assertThat(res.getName()).isEqualTo("Mohammed");
-        assertThat(res.getCountry()).isEqualTo("France");
+        assertThat(res)
+                .returns(1,UserDTO::getId)
+                .returns("Mohammed",UserDTO::getName)
+                .returns("France",UserDTO::getCountry);
     }
 
     @Test
-    public void createUserNotFrench() throws ParseException {
+    public void isFrench_False_CountryNotFrance() throws ParseException {
         UserDTO userDTO = new UserDTO();
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
         userDTO.setName("Mohammed");
@@ -76,7 +77,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUserMineur() throws ParseException {
+    public void isAdult_False_AgeLessThan18() throws ParseException {
         UserDTO userDTO = new UserDTO();
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/2010");
         userDTO.setName("Mohammed");

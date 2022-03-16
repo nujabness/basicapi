@@ -7,7 +7,7 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 public class UserDTOTest {
 
     @Test
-    public void UserDTOTestPOJO() {
+    public void UserDTOMethods_True_MethodsAreWellImplemented() {
         final Class<?> classUnderTest = UserDTO.class;
         assertPojoMethodsFor(classUnderTest).areWellImplemented();
     }

@@ -42,38 +42,38 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void findById() {
+    public void findById_true_found() {
         entityManager.persist(user);
         User userLocal = userRepository.findById(3).get();
         assertThat(userLocal).isEqualTo(user);
     }
 
     @Test
-    public void saveWithEmptyUserName() {
+    public void saveUser_False_EmptyUserName() {
         user.setName("");
         assertThrows(ConstraintViolationException.class, () -> entityManager.persistAndFlush(user));
     }
 
     @Test
-    public void saveWithEmptyCountry() {
+    public void saveUser_False_EmptyCountry() {
         user.setCountry("");
         assertThrows(ConstraintViolationException.class, () -> entityManager.persistAndFlush(user));
     }
 
     @Test
-    public void saveWithEmptyPhoneNumber() {
+    public void saveUser_False_EmptyPhoneNumber() {
         user.setPhoneNumber("");
         assertThrows(ConstraintViolationException.class, () -> entityManager.persistAndFlush(user));
     }
 
     @Test
-    public void saveWithEmptyBirthdate() {
+    public void saveUser_False_NullBirthdate() {
         user.setBirthDate(null);
         assertThrows(ConstraintViolationException.class, () -> entityManager.persistAndFlush(user));
     }
 
     @Test
-    public void saveWithEmptyGender() {
+    public void saveUser_False_NullGender() {
         user.setBirthDate(null);
         assertThrows(ConstraintViolationException.class, () -> entityManager.persistAndFlush(user));
     }

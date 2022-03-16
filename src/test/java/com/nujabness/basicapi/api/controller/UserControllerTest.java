@@ -43,7 +43,7 @@ public class UserControllerTest {
     private final static ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void getUserById() throws Exception {
+    public void getUserById_True_Found() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
         UserDTO userDTO = new UserDTO();
@@ -64,7 +64,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserByIdNotFound() throws Exception {
+    public void getUserById_False_NotFound() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
         UserDTO userDTO = new UserDTO();
@@ -83,7 +83,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser() throws Exception {
+    public void createUser_True_ValidUser() throws Exception {
         Integer id = 1;
         Date birthDate = new SimpleDateFormat("dd/MM/yyyy").parse("05/11/1998");
         UserDTO userDTO = new UserDTO();
@@ -106,7 +106,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserInvalidUser() throws Exception {
+    public void createUser_False_InvalidUser() throws Exception {
         Integer id = 1;
         UserDTO userDTO = new UserDTO();
         userDTO.setName(null);
