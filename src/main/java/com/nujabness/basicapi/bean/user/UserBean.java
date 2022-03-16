@@ -23,13 +23,11 @@ public class UserBean {
 
     @NotBlank(message = "PhoneNumber must not be null")
     @Pattern(regexp = "^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
-            message = "PhoneNumber is not Valid"
-    )
+            message = "PhoneNumber is not Valid")
     private String phoneNumber;
 
     @NotBlank(message = "Gender must not be null")
     @Pattern(regexp = "MALE|FEMALE",
-            message = "Gender is not Valid"
-    )
+            message = "Gender is not Valid")
     private String gender;
 }
