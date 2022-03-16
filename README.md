@@ -15,6 +15,11 @@
     mvnw spring-boot:run
   ```
 
+## Documentation
+```
+    http://localhost:8080/swagger-ui/index.html  
+```
+
 ## Routes
 
 - Get User
