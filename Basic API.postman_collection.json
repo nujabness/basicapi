@@ -124,6 +124,62 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST User error 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Momo\",\r\n    \"birthDate\": \"05/11/1998\",\r\n    \"country\": \"SPAIN\",\r\n    \"phoneNumber\": \"0695777485\",\r\n    \"gender\": \"MALE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User error 4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Momo\",\r\n    \"birthDate\": \"05/11/2010\",\r\n    \"country\": \"France\",\r\n    \"phoneNumber\": \"0695777485\",\r\n    \"gender\": \"MALE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
