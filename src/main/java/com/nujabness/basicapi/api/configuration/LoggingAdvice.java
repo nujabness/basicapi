@@ -1,4 +1,4 @@
-package com.nujabness.basicapi.service.configuration.execution;
+package com.nujabness.basicapi.api.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
